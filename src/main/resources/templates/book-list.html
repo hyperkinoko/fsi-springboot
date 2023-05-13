@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>マイルストーンアプリ</title>
+</head>
+<body>
+    <h1>本のリスト</h1>
+    <ul>
+        <th:block th:each="book : ${books}">
+            <li>[[${book}]]</li>
+        </th:block>
+    </ul>
+</body>
+</html>
