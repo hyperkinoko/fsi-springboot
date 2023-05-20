@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>マイルストーンアプリ</title>
+</head>
+<body>
+    <h1>本の追加</h1>
+    <form th:action="@{/books/add}" method="post" th:object="${input}">
+        <input type="text" th:field="*{title}" />
+        <input type="text" th:field="*{author}" />
+        <input type="number" th:field="*{numOfPages}" />
+        <input type="number" th:field="*{classification}" />
+        <input type="submit" value="送信" />
+    </form>
+</body>
+</html>
