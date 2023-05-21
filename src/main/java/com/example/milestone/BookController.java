@@ -1,5 +1,8 @@
 package com.example.milestone;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,15 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BookController {
+    private List<Book> books = new ArrayList<>();
     
     @GetMapping("books")
     public String getBooks(Model model) {
-        Book[] books = new Book[4];
-        books[0] = new Book("Java基礎", "kinoko", 32, 5);
-        books[1] = new Book("Java応用", "tanaka", 50, 5);
-        books[2] = new Book("Java実践", "ichiki", 100, 5);
-        books[3] = new Book("Java演習", "kinoshita", 45, 5);
-        model.addAttribute("books", books);
+        model.addAttribute("books", this.books);
         return "book-list";
     }
 
@@ -29,8 +28,11 @@ public class BookController {
     @PostMapping("books/add")
     public String postAddBook(@ModelAttribute PostBookRequest input, Model model) {
         Book book = new Book(input.getTitle(), input.getAuthor(), input.getNumOfPages(), input.getClassification());
-        System.out.println(book);
+        this.books.add(book);
+        for(Book b : books) {
+            System.out.println(b);
+        }
         model.addAttribute("book", book);
-        return "result";
+        return "redirect:/books";
     }
 }
