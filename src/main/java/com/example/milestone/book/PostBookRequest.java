@@ -1,4 +1,4 @@
-package com.example.milestone;
+package com.example.milestone.book;
 
 public class PostBookRequest {
     // 本のタイトル

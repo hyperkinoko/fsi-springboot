@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>マイルストーンアプリ</title>
+</head>
+<body>
+    <h1>マイルストーン一覧</h1>
+    <th:block th:if="${milestones.size() > 0}">
+        <ul>
+            <th:block th:each="milestone : ${milestones}">
+                <li><a th:href="@{/milestones/{id}(id=${milestone.id})}">[[${milestone}]]</a></li>
+            </th:block>
+        </ul>
+    </th:block>
+    <th:block th:unless="${milestones.size() > 0}">
+        <p>現在有効なマイルストーンはありません</p>
+    </th:block>
+    <a href="/milestones/add">追加</a>
+</body>
+</html>

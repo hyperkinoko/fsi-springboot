@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>マイルストーンアプリ</title>
+</head>
+<body>
+    <h1>マイルストーンの詳細ページ</h1>
+    <th:block th:if="${milestone == null}">
+        <p>該当する本はありません</p>
+    </th:block>
+    <th:block th:if="${milestone != null}">
+        <table>
+            <tr>
+                <td>タイトル</td>
+                <td>[[${milestone.title}]]</td>
+            </tr>
+            <tr>
+                <td>詳細</td>
+                <td>[[${milestone.description}]]</td>
+            </tr>
+            <tr>
+                <td>期限</td>
+                <td>[[${milestone.deadline}]]</td>
+            </tr>
+        </table>
+        <a th:href="@{/milestones/{id}/edit(id=${milestone.id})}">編集</a>
+        <a th:href="@{/milestones/{id}/delete(id=${milestone.id})}">削除</a>
+    </th:block>
+    <a href="/milestones">リストに戻る</a>
+</body>
+</html>

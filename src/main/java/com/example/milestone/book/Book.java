@@ -1,4 +1,4 @@
-package com.example.milestone;
+package com.example.milestone.book;
 
 import java.util.UUID;
 
@@ -77,4 +77,3 @@ public class Book {
       return id + ": " + author + "『" + title + "』(" + numOfPages + "ページ, " + classification + ")";
     }
   }
-  

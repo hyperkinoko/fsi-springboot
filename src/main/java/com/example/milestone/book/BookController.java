@@ -1,4 +1,4 @@
-package com.example.milestone;
+package com.example.milestone.book;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +19,13 @@ public class BookController {
     public String getBooks(Model model) {
         List<Book> books = findAll();
         model.addAttribute("books", books);
-        return "book-list";
+        return "book/book-list";
     }
 
     @GetMapping("books/add")
     public String getAddBook(Model model) {
         model.addAttribute("input", new PostBookRequest());
-        return "book-add";
+        return "book/book-add";
     }
 
     @PostMapping("books/add")
@@ -38,7 +38,7 @@ public class BookController {
     public String getBookDetail(@PathVariable String id, Model model) {
         Book book = findBookById(id);
         model.addAttribute("book", book);
-        return "book-detail";
+        return "book/book-detail";
     }
 
     @GetMapping("books/{id}/delete")
@@ -63,7 +63,7 @@ public class BookController {
         input.setClassification(book.getClassification().ordinal());
         model.addAttribute("input", input);
         model.addAttribute("id", id);
-        return "book-edit";
+        return "book/book-edit";
     }
 
     @PostMapping("books/{id}/edit")

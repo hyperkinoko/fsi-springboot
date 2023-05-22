@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>マイルストーンアプリ</title>
+</head>
+<body>
+    <h1>マイルストーンの編集</h1>
+    <form th:action="@{/milestones/{id}/edit(id=${id})}" method="post" th:object="${input}">
+        <input type="text" th:field="*{title}" />
+        <input type="text" th:field="*{description}" />
+        <input type="date" th:field="*{deadline}" />
+        <input type="submit" value="送信" />
+    </form>
+</body>
+</html>

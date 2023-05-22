@@ -1,4 +1,4 @@
-package com.example.milestone;
+package com.example.milestone.book;
 
 public enum BookClassification {
     GENERAL_WORKS("総記"),
@@ -37,4 +37,3 @@ public enum BookClassification {
         return this.jpName;
     }
   }
-  
