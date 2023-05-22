@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>マイルストーンアプリ</title>
+</head>
+<body>
+    <h1>本の詳細ページ</h1>
+    <th:block th:if="${book == null}">
+        <p>該当する本はありません</p>
+    </th:block>
+    <th:block th:if="${book != null}">
+        <table>
+            <tr>
+                <td>タイトル</td>
+                <td>[[${book.title}]]</td>
+            </tr>
+            <tr>
+                <td>著者</td>
+                <td>[[${book.author}]]</td>
+            </tr>
+            <tr>
+                <td>ページ数</td>
+                <td>[[${book.numOfPages}]]ページ</td>
+            </tr>
+            <tr>
+                <td>分類</td>
+                <td>[[${book.classification}]]</td>
+            </tr>
+        </table>
+        <a th:href="@{/books/{id}/edit(id=${book.id})}">編集</a>
+        <a th:href="@{/books/{id}/delete(id=${book.id})}">削除</a>
+    </th:block>
+    <a href="/books">リストに戻る</a>
+</body>
+</html>

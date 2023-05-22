@@ -1,6 +1,11 @@
 package com.example.milestone;
 
+import java.util.UUID;
+
 public class Book {
+    // 本のID（UUID）
+    private String id;
+
     // 本のタイトル
     private String title;
   
@@ -15,6 +20,7 @@ public class Book {
   
     // コンストラクタ
     public Book(String title, String author, int numOfPages, BookClassification classification) {
+      this.id = UUID.randomUUID().toString();
       this.title = title;
       this.author = author;
       this.numOfPages = numOfPages;
@@ -24,6 +30,14 @@ public class Book {
     // コンストラクタ
     public Book(String title, String author, int numOfPages, int classificationNumber) {
       this(title, author, numOfPages, BookClassification.fromNumber(classificationNumber));
+    }
+
+    public String getId() {
+      return id;
+    }
+
+    public void setId(String id) {
+      this.id = id;
     }
   
     public String getTitle() {
@@ -60,7 +74,7 @@ public class Book {
   
     @Override
     public String toString() {
-      return author + "『" + title + "』(" + numOfPages + "ページ, " + classification + ")";
+      return id + ": " + author + "『" + title + "』(" + numOfPages + "ページ, " + classification + ")";
     }
   }
   

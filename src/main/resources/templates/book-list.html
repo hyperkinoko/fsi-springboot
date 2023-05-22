@@ -9,12 +9,13 @@
     <th:block th:if="${books.size() > 0}">
         <ul>
             <th:block th:each="book : ${books}">
-                <li>[[${book}]]</li>
+                <li><a th:href="@{/books/{id}(id=${book.id})}">[[${book}]]</a></li>
             </th:block>
         </ul>
     </th:block>
     <th:block th:unless="${books.size() > 0}">
         <p>現在本はありません</p>
     </th:block>
+    <a href="/books/add">追加</a>
 </body>
 </html>
