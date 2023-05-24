@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BookController {
-    private List<Book> books = new ArrayList<>();
+    private final BookDAO dao = new BookDAO();
 
     @GetMapping("books")
     public String getBooks(Model model) {
-        List<Book> books = findAll();
+        List<Book> books = dao.findAll();
         model.addAttribute("books", books);
         return "book-list";
     }
@@ -30,26 +30,26 @@ public class BookController {
 
     @PostMapping("books/add")
     public String postAddBook(@ModelAttribute PostBookRequest input) {
-        createBook(input);
+        dao.createBook(input);
         return "redirect:/books";
     }
 
     @GetMapping("books/{id}")
     public String getBookDetail(@PathVariable String id, Model model) {
-        Book book = findBookById(id);
+        Book book = dao.findBookById(id);
         model.addAttribute("book", book);
         return "book-detail";
     }
 
     @GetMapping("books/{id}/delete")
     public String getBookDelete(@PathVariable String id) {
-        deleteBookById(id);
+        dao.deleteBookById(id);
         return "redirect:/books";
     }
 
     @GetMapping("books/{id}/edit")
     public String getEditBook(@PathVariable String id, Model model) {
-        Book book = findBookById(id);
+        Book book = dao.findBookById(id);
 
         // 早期リターン
         if(book == null) {
@@ -68,50 +68,10 @@ public class BookController {
 
     @PostMapping("books/{id}/edit")
     public String postEditBook(@PathVariable String id, @ModelAttribute PostBookRequest input) {
-        Book book = updateBook(id, input);
+        Book book = dao.updateBook(id, input);
         if(book == null) {
             return "redirect:/books";
         }
         return "redirect:/books/" + id;
-    }
-
-    private Book createBook(PostBookRequest input) {
-        Book book = new Book(input.getTitle(), input.getAuthor(), input.getNumOfPages(), input.getClassification());
-        this.books.add(book);
-        return book;
-    }
-
-    private List<Book> findAll() {
-        return this.books;
-    }
-
-    private Book findBookById(String id) {
-        for(Book book : this.books) {
-            if(book.getId().equals(id)) {
-                //見つかったとき
-                return book;
-            }
-        }
-        // booksの最後まで見て，見つからなかったとき
-        return null;
-    }
-
-    private Book updateBook(String id, PostBookRequest input) {
-        Book book = findBookById(id);
-
-        if(book == null) {
-            return null;
-        }
-
-        book.setTitle(input.getTitle());
-        book.setAuthor(input.getAuthor());
-        book.setNumOfPages(input.getNumOfPages());
-        book.setClassification(BookClassification.fromNumber(input.getClassification()));
-        
-        return book;
-    }
-
-    private boolean deleteBookById(String id) {
-        return this.books.removeIf(book -> book.getId().equals(id));
     }
 }

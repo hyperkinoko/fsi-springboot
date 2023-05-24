@@ -1,1 +1,0 @@
-INSERT INTO book VALUES('dfjglf2-dhje-sdfe', 'Java基礎', 'きのこ', 32, 4);
